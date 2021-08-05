@@ -1,11 +1,9 @@
 import { Container, TableBody, TableCell, TableRow } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import useStyles from '../styles';
 import useTable from './useTable';
 
 export default function Orders() {
-    const classes = useStyles();
 
     const headCells = [
         {id: 'id', label: 'User ID'},
@@ -22,16 +20,13 @@ export default function Orders() {
 
 
     useEffect(() => {
-        // GET request using axios inside useEffect React hook
         axios.get('https://jsonplaceholder.typicode.com/todos')
             .then(response => setOrders(response.data));
-    
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
     return (
         <Container>
-            <h1>Orders</h1>
+            <h1 className="orderHeader" id="order">Orders</h1>
             <TableContainer>
                 <TblHead />
                 <TableBody>
@@ -41,7 +36,6 @@ export default function Orders() {
                                 <TableCell>{order.userId}</TableCell>
                                 <TableCell>{order.id}</TableCell>
                                 <TableCell>{order.title}</TableCell>
-                                <TableCell>{order.completed}</TableCell>
                             </TableRow>))
                     }
                     <TableRow>

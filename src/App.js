@@ -1,6 +1,6 @@
 import useStyles from './styles'
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import { Typography, AppBar, Toolbar, Container, Grid, CssBaseline } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import Header from './components/Header';
 import Home from './components/Home'
 import Orders from './components/Orders';

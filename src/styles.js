@@ -32,17 +32,17 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
         fontWeight: '2px'
     },
+    // textarea: {
+    //     display: 'block',
+    //     margin: '0 auto',
+    //     width: '100'
+    // },
     viewOrders: {
-        color: '#E02C28'
+        color: '#E02C28',
     },
     modalButtons: {
-        marginTop: '2px'
+        padding: theme.spacing(2, 4, 3),
     },
-    ordersContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
 }));
 
 export default useStyles;
