@@ -1,15 +1,20 @@
-import { Container, TableBody, TableCell, TableRow, Toolbar } from '@material-ui/core';
+import { Card, CardContent, Container, Grid, TableBody, TableCell, TableRow, Toolbar, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useTable from './useTable';
 import Controls from './Controls';
 
+import useStyles from '../styles';
+
 export default function Orders() {
 
+    const classes = useStyles();
     const headCells = [
-        {id: 'id', label: 'User ID'},
-        {id: 'id2', label: 'Order ID'},
-        {id: 'descrp', label: 'Description'}
+        {id: 'id', label: 'Order #'},
+        {id: 'id2', label: 'Pizza #'},
+        {id: 'id3', label: 'Size'},
+        {id: 'id4', label: 'Crust'},
+        {id: 'id5', label: 'Type'}
     ];
 
     const [orders, setOrders] = useState([])
@@ -23,7 +28,7 @@ export default function Orders() {
 
 
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/todos')
+        axios.get('http://localhost:5000/api/orders')
             .then(response => setOrders(response.data));
     }, []);
 
@@ -37,9 +42,8 @@ export default function Orders() {
                     onChange={event => {setSearchTerm(event.target.value)}}
                 />    
             </Toolbar>
-            <TableContainer>
-                <TblHead />
-                <TableBody>
+            <div className={classes.cardGrid}>
+                <Grid container spacing={4}>
                     {
                         orders.filter((val) => {
                             if (searchTerm == "") {
@@ -48,14 +52,36 @@ export default function Orders() {
                                 return val
                             }
                         }).map(order => 
-                            (<TableRow key={order.id}>
-                                <TableCell>{order.userId}</TableCell>
-                                <TableCell>{order.id}</TableCell>
-                                <TableCell>{order.title}</TableCell>
-                            </TableRow>))
-                    }
-                </TableBody>
-            </TableContainer>
+                            (<Grid item key={order.order_number} xs={12} sm={6} md={4}>
+                                <Card className={classes.card}>
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography gutterBottom variant='h5'>
+                                            Order Number: {order.order_number}
+                                        </Typography>
+                                        {
+                                            order.Pizzas.map(pizza => 
+                                                (<div key={pizza.pizza_id}>
+                                                    <Typography gutterBottom>
+                                                        Pizza {pizza.pizza_number} - {pizza.size}, {pizza.crust}, {pizza.type}
+                                                    </Typography>
+                                                    {
+                                                        pizza.type == 'custom' &&
+                                                        pizza.Pizza_Addons.reverse().map(addons => (
+                                                            <div key={addons.id}>
+                                                            <Typography>
+                                                                Toppings {addons.toppings_area} - {addons.toppings_item}
+                                                            </Typography>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>))     
+                                        }
+                                    </CardContent>
+                                </Card>
+                            </Grid>))
+                    }   
+                </Grid>
+            </div>
         </Container>
     );
 }

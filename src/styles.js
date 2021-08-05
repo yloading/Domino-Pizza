@@ -43,6 +43,17 @@ const useStyles = makeStyles((theme) => ({
     modalButtons: {
         padding: theme.spacing(2, 4, 3),
     },
+    cardGrid: {
+        padding: '20px 0'
+    },
+    card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    cardContent: {
+        flexGrow: 5,
+    }
 }));
 
 export default useStyles;
