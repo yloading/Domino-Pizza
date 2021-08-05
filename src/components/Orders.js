@@ -1,7 +1,8 @@
-import { Container, TableBody, TableCell, TableRow } from '@material-ui/core';
+import { Container, TableBody, TableCell, TableRow, Toolbar } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useTable from './useTable';
+import Controls from './Controls';
 
 export default function Orders() {
 
@@ -12,6 +13,8 @@ export default function Orders() {
     ];
 
     const [orders, setOrders] = useState([])
+
+    const [searchTerm, setSearchTerm] = useState('')
 
     const {
         TableContainer,
@@ -27,20 +30,30 @@ export default function Orders() {
     return (
         <Container>
             <h1 className="orderHeader" id="order">Orders</h1>
+            <Toolbar>
+                <Controls.Input
+                    label="Search Order"
+                    style={{ width: '100%' }}
+                    onChange={event => {setSearchTerm(event.target.value)}}
+                />    
+            </Toolbar>
             <TableContainer>
                 <TblHead />
                 <TableBody>
                     {
-                        orders.map(order => 
+                        orders.filter((val) => {
+                            if (searchTerm == "") {
+                                return val
+                            } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return val
+                            }
+                        }).map(order => 
                             (<TableRow key={order.id}>
                                 <TableCell>{order.userId}</TableCell>
                                 <TableCell>{order.id}</TableCell>
                                 <TableCell>{order.title}</TableCell>
                             </TableRow>))
                     }
-                    <TableRow>
-                        <TableCell>Hi</TableCell>
-                    </TableRow>
                 </TableBody>
             </TableContainer>
         </Container>
