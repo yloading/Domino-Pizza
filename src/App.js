@@ -1,10 +1,11 @@
 import useStyles from './styles'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Typography, AppBar, Toolbar, Container, Grid, CssBaseline } from '@material-ui/core';
 import Header from './components/Header';
 import Home from './components/Home'
+import Orders from './components/Orders';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily: [
       'Kanit',
@@ -22,6 +23,7 @@ function App() {
         <Header />
         <Home />
       </div>
+        <Orders />
     </ThemeProvider>
   );
 }

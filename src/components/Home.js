@@ -7,7 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from '@material-ui/core/TextField';
 
 import useStyles from '../styles';
 
@@ -58,28 +58,33 @@ export default function Header() {
                             <h2 id="transition-modal-title">Please enter the order in PML format below.</h2>
                             <p id="transition-modal-description">You can also upload it using the upload button.</p>
                             
-                            <TextareaAutosize
-                                maxRows={10}
-                                aria-label="maximum height"
-                                placeholder="Maximum 4 rows"
+                            <TextField
+                                variant="outlined"
+                                className={classes.textarea}
+                                multiline
+                                rows={10}
+                                maxRows={20}
+                                style={{  display: 'inline-block', }}
                             />
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                className={classes.button}
-                                endIcon={<Icon>delete</Icon>}
-                                onClick={handleClose}
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                endIcon={<Icon>send</Icon>}
-                            >
-                                Send
-                            </Button>
+                            <div className="modalButtons">
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    className={classes.button}
+                                    endIcon={<Icon>delete</Icon>}
+                                    onClick={handleClose}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                    endIcon={<Icon>send</Icon>}
+                                >
+                                    Send
+                                </Button>
+                            </div>
                         </div>
                     </Fade>
                 </Modal>

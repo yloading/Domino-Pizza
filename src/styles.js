@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { Autorenew } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,9 +30,18 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        fontWeight: '2px'
     },
     viewOrders: {
         color: '#E02C28'
+    },
+    modalButtons: {
+        marginTop: '2px'
+    },
+    ordersContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 }));
 

@@ -8,7 +8,7 @@ export default function Header() {
 
     return (
         <div>
-            <AppBar position="relative" style={{ backgroundColor: '#E4A927' }}>
+            <AppBar position="fixed" style={{ backgroundColor: '#E4A927' }}>
                 <Toolbar className={classes.appBarWrapper}>
                     <Typography variant="h6" style={{ color: '#E02C28', flexGrow: '1' }}>
                         Domino's Pizza
