@@ -32,16 +32,19 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
         fontWeight: '2px'
     },
-    // textarea: {
-    //     display: 'block',
-    //     margin: '0 auto',
-    //     width: '100'
-    // },
+    textarea: {
+        padding: '10px',
+        display: 'flex',
+        justifyContent: 'center'
+    },
     viewOrders: {
         color: '#E02C28',
     },
     modalButtons: {
-        padding: theme.spacing(2, 4, 3),
+        padding: '10px',
+        display: 'flex',
+        justifyContent: 'center'
+
     },
     cardGrid: {
         padding: '20px 0'

@@ -1,4 +1,4 @@
-import { Card, CardContent, Container, Grid, TableBody, TableCell, TableRow, Toolbar, Typography } from '@material-ui/core';
+import { Card, CardContent, Container, Grid, Toolbar, Typography } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useTable from './useTable';
@@ -46,7 +46,7 @@ export default function Orders() {
                 <Grid container spacing={4}>
                     {
                         orders.filter((val) => {
-                            if (searchTerm == "") {
+                            if (searchTerm === "") {
                                 return val
                             } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
                                 return val
@@ -65,7 +65,7 @@ export default function Orders() {
                                                         Pizza {pizza.pizza_number} - {pizza.size}, {pizza.crust}, {pizza.type}
                                                     </Typography>
                                                     {
-                                                        pizza.type == 'custom' &&
+                                                        pizza.type === 'custom' &&
                                                         pizza.Pizza_Addons.reverse().map(addons => (
                                                             <div key={addons.id}>
                                                             <Typography>

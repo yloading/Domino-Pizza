@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Grid } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
@@ -7,12 +7,16 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
 
 import useStyles from '../styles';
 
 export default function Header() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+
+    const [inputText, setInputText] = useState('');
+    const [responseMsg, setResponseMsg] = useState('');
 
     const handleOpen = () => {
       setOpen(true);
@@ -21,6 +25,23 @@ export default function Header() {
     const handleClose = () => {
       setOpen(false);
     };
+
+    const onValueChange = (e) => {
+        setInputText(e.target.value);
+    }
+
+    const onSubmit = () => {
+        const inputRequest = {
+            pml: inputText
+        }
+        
+        axios.post('http://localhost:5000/api/orders', inputRequest)
+        .then(response => console.log(response))
+        .catch(error => {
+            setResponseMsg('error');
+            console.error('There was an error!', error);
+        });
+    }
 
     return (
     <div>
@@ -55,24 +76,24 @@ export default function Header() {
                     <Fade in={open}>
                         <div className={classes.paper}>
                             <h2 id="transition-modal-title">Please enter the order in PML format below.</h2>
-                            <p id="transition-modal-description">You can also upload it using the upload button.</p>
-                            
-                            <div className={classes.textarea}>
-                                <TextField
-                                    variant="outlined"
-                                    multiline
-                                    rows={10}
-                                    maxRows={20}
-                                    style={{  display: 'inline-block', margin: '0', width: '100' }}
-                                />
-                            </div>
-                            
-                            <div className="modalButtons">
-                                <Button color="secondary" onClick={handleClose}>Cancel</Button>
-                                <Button variant="contained" color="primary">
-                                    Submit
-                                </Button>
-                            </div>
+                            <form>
+                                <div className={classes.textarea}>
+                                    <TextField
+                                        variant="outlined"
+                                        multiline
+                                        minRows={15}
+                                        maxRows={20}
+                                        onChange={(e) => onValueChange(e)}
+                                    />
+                                </div>
+                                
+                                <div className={classes.modalButtons}>
+                                    <Button variant="contained" color="secondary" onClick={handleClose}>Cancel</Button>
+                                    <Button variant="contained" color="primary" onClick={() => onSubmit()}>
+                                        Submit
+                                    </Button>
+                                </div>
+                            </form>
                         </div>
                     </Fade>
                 </Modal>
